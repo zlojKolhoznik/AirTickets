@@ -1,0 +1,38 @@
+﻿@model IEnumerable<AirTickets.Models.Ticket>
+
+@{
+    ViewData["Title"] = "My Tickets";
+}
+
+<h2>My Tickets</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Route</th>
+            <th>Seat Number</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ticket in Model)
+        {
+            <tr>
+                <td>@ticket.FlightNumberNavigation.DepartureAirport - @ticket.FlightNumberNavigation.ArrivalAirport</td>
+                <td>@ticket.SeatNumber</td>
+                <td>@ticket.Status</td>
+                <td>
+                    @if (ticket.Status != "Returned")
+                    {
+                        <a asp-action="Return" asp-route-flightNumber="@ticket.FlightNumber" class="btn btn-danger">Return</a>
+                    }
+                    @if (ticket.Status == "Booked")
+                    {
+                        <a asp-action="Pay" asp-route-flightNumber="@ticket.FlightNumber" class="btn btn-success">Pay</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

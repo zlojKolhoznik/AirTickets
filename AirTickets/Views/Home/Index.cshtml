@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Flight>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    @if (ViewBag.IsAuthenticated) 
+    {
+        if (ViewBag.City is not null)
+        {
+            <p>Here are flights from @ViewBag.City</p>
+        }
+        else
+        {
+            <p>Here are some flights from all cities.</p>
+        }
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Flight Number</th>
+                    <th>Aircraft Number</th>
+                    <th>Departure Airport</th>
+                    <th>Arrival Airport</th>
+                    <th>Departures at</th>
+                    <th>Arrives at</th>
+                </tr>
+            </thead>
+            <tbody> 
+                @foreach (var flight in Model)
+                {
+                    <tr>
+                        <td><a asp-action="Book" asp-controller="Tickets" asp-route-flightNumber="@flight.Number">@flight.Number</a></td>
+                        <td>@flight.AircraftNumber (@flight.AircraftNumberNavigation.ManufacturerName @flight.AircraftNumberNavigation.ModelName)</td>
+                        <td>@flight.DepartureAirportNavigation.City (@flight.DepartureAirportNavigation.Iatacode)</td>
+                        <td>@flight.ArrivalAirportNavigation.City (@flight.ArrivalAirportNavigation.Iatacode)</td>
+                        <td>@flight.DepartureDateTime.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</td>
+                        <td>@flight.ArrivalDateTime.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Log in or register to view flights from your city.</p>
+    }
+</div>

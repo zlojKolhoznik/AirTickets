@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Register";
+}
+
+<h2>Register</h2>
+
+<form asp-action="Register" method="post">
+    <div class="form-group mb-3">
+        <label for="PassportNumber" class="form-label">Passport Number</label>
+        <input id="PassportNumber" name="passportNumber" class="form-control" />
+    </div>
+    <div class="form-group mb-3">
+        <label for="PhoneNumber" class="form-label">Phone Number</label>
+        <input id="PhoneNumber" name="phoneNumber" class="form-control" />
+    </div>
+    <div class="form-group mb-3">
+        <label for="Password" class="form-label">Password</label>
+        <input id="Password" name="password" type="password" class="form-control" />
+    </div>
+    <div class="form-group mb-3">
+        <label for="FirstName" class="form-label">First Name</label>
+        <input id="FirstName" name="firstName" class="form-control" />
+    </div>
+    <div class="form-group mb-3">
+        <label for="LastName" class="form-label">Last Name</label>
+        <input id="LastName" name="lastName" class="form-control" />
+    </div>
+    <div class="form-group mb-3">
+        <label for="BaseCity" class="form-label">Base City (optional)</label>
+        <input id="BaseCity" name="baseCity" class="form-control" />
+    </div>
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+
+<div class="d-flex justify-content-center">
+    <a asp-action="Login" class="btn btn-link">Already have an account? Login</a>
+</div>

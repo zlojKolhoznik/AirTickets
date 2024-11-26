@@ -1,0 +1,19 @@
+﻿@model AirTickets.Models.Ticket
+
+@{
+    ViewData["Title"] = $"Book for {ViewBag.FlightNumber}";
+}
+
+<h2>Book Ticket for Flight @ViewBag.FlightNumber</h2>
+
+<form asp-action="Book" method="post">
+    <input type="hidden" asp-for="FlightNumber" value="@ViewBag.FlightNumber" />
+    <input type="hidden" asp-for="OwnerPassportNumber" value="@ViewBag.OwnerPassportNumber" />
+
+    <div class="form-group mb-3">
+        <label asp-for="SeatNumber" class="form-label"></label>
+        <select asp-for="SeatNumber" class="form-control" asp-items="@(new SelectList(ViewBag.AvailableSeats))"></select>
+    </div>
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+    <button type="submit" class="btn btn-primary">Book</button>
+</form>
